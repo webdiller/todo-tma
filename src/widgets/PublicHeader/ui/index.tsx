@@ -7,12 +7,12 @@ export const PublicHeader = () => {
   const useLocationAPI = useLocation()
   const initDataUser = useSignal(initData.user)
   return (
-    <div>
+    <div className="mb-2">
       {/* APP BAR */}
-      <div className="container flex items-center justify-between py-2">
+      {/* <div className="container flex items-center justify-between py-1">
         <Link
           to="/"
-          className="inline-flex h-10 w-32 items-center justify-center rounded-xl bg-slate-100">
+          className="inline-flex h-8 items-center justify-center rounded-xl bg-slate-100 px-4">
           Loop It
         </Link>
         <Avatar className="relative overflow-hidden uppercase">
@@ -22,7 +22,7 @@ export const PublicHeader = () => {
           <span>{initDataUser?.username?.slice(0, 2)}</span>
         </Avatar>
       </div>
-      <hr className="h-px bg-slate-100" />
+      <hr className="h-px bg-slate-50" /> */}
       {/* TABS */}
       <TabsList className="container justify-center py-2">
         <Button
@@ -44,6 +44,7 @@ export const PublicHeader = () => {
           </Link>
         </Button>
       </TabsList>
+      <hr className="h-px bg-slate-50" />
     </div>
   )
 }

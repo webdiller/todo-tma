@@ -1,3 +1,5 @@
+import { popup } from "@telegram-apps/sdk"
+import { Button } from "@telegram-apps/telegram-ui"
 import React from "react"
 
 type Props = {}
@@ -5,6 +7,26 @@ type Props = {}
 export const ViewUI = (props: Props) => {
   return (
     <div className="container">
+      <div>
+        <Button
+          onClick={() =>
+            popup.open({
+              message: "Open poput",
+              buttons: [
+                {
+                  text: "Open",
+                  type: "default",
+                },
+                {
+                  text: "Close",
+                  type: "destructive",
+                },
+              ],
+            })
+          }>
+          Open popup
+        </Button>
+      </div>
       <div className="space-y-4 *:size-10">
         <div className="bg-accent_text_color border" />
         accent_text_color
