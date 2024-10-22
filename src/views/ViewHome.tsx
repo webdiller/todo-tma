@@ -5,8 +5,6 @@ export const ViewHome = () => {
   const initDataUser = useSignal(initData.user)
   const initDataHash = useSignal(initData.hash)
   return (
-    <div className="container">
-      ViewHome
-    </div>
+    <div className="container">ViewHome</div>
   )
 }

@@ -11,6 +11,7 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as UiKitImport } from './routes/ui-kit'
 import { Route as IndexImport } from './routes/index'
 import { Route as ProfileIndexImport } from './routes/profile/index'
 import { Route as ProfileTodosIndexImport } from './routes/profile/todos/index'
@@ -18,6 +19,11 @@ import { Route as ProfileTodosRecentIndexImport } from './routes/profile/todos/r
 import { Route as ProfileTodosCreateIndexImport } from './routes/profile/todos/create/index'
 
 // Create/Update Routes
+
+const UiKitRoute = UiKitImport.update({
+  path: '/ui-kit',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   path: '/',
@@ -55,6 +61,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/ui-kit': {
+      id: '/ui-kit'
+      path: '/ui-kit'
+      fullPath: '/ui-kit'
+      preLoaderRoute: typeof UiKitImport
+      parentRoute: typeof rootRoute
+    }
     '/profile/': {
       id: '/profile/'
       path: '/profile'
@@ -90,6 +103,7 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ui-kit': typeof UiKitRoute
   '/profile': typeof ProfileIndexRoute
   '/profile/todos': typeof ProfileTodosIndexRoute
   '/profile/todos/create': typeof ProfileTodosCreateIndexRoute
@@ -98,6 +112,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ui-kit': typeof UiKitRoute
   '/profile': typeof ProfileIndexRoute
   '/profile/todos': typeof ProfileTodosIndexRoute
   '/profile/todos/create': typeof ProfileTodosCreateIndexRoute
@@ -107,6 +122,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/ui-kit': typeof UiKitRoute
   '/profile/': typeof ProfileIndexRoute
   '/profile/todos/': typeof ProfileTodosIndexRoute
   '/profile/todos/create/': typeof ProfileTodosCreateIndexRoute
@@ -117,6 +133,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/ui-kit'
     | '/profile'
     | '/profile/todos'
     | '/profile/todos/create'
@@ -124,6 +141,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/ui-kit'
     | '/profile'
     | '/profile/todos'
     | '/profile/todos/create'
@@ -131,6 +149,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/ui-kit'
     | '/profile/'
     | '/profile/todos/'
     | '/profile/todos/create/'
@@ -140,6 +159,7 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  UiKitRoute: typeof UiKitRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
   ProfileTodosIndexRoute: typeof ProfileTodosIndexRoute
   ProfileTodosCreateIndexRoute: typeof ProfileTodosCreateIndexRoute
@@ -148,6 +168,7 @@ export interface RootRouteChildren {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  UiKitRoute: UiKitRoute,
   ProfileIndexRoute: ProfileIndexRoute,
   ProfileTodosIndexRoute: ProfileTodosIndexRoute,
   ProfileTodosCreateIndexRoute: ProfileTodosCreateIndexRoute,
@@ -167,6 +188,7 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/ui-kit",
         "/profile/",
         "/profile/todos/",
         "/profile/todos/create/",
@@ -175,6 +197,9 @@ export const routeTree = rootRoute
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/ui-kit": {
+      "filePath": "ui-kit.tsx"
     },
     "/profile/": {
       "filePath": "profile/index.tsx"
