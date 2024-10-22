@@ -1,0 +1,3 @@
+export enum LOCAL_STORAGE_KEYS {
+  LS_ACCESS_TOKEN = "LS_ACCESS_TOKEN",
+}
