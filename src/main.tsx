@@ -25,7 +25,7 @@ const rootElement = document.getElementById("root")!
 if (!rootElement.innerHTML) {
   const isDevMode = process.env.NODE_ENV === "development" ? true : false
   const root = ReactDOM.createRoot(rootElement)
-  init(retrieveLaunchParams().startParam === 'debug' || import.meta.env.DEV);
+  // init(retrieveLaunchParams().startParam === 'debug' || import.meta.env.DEV);
   root.render(
     <StrictMode>
       <TanstackProvider>

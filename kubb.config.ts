@@ -10,7 +10,7 @@ export default defineConfig(async () => {
     root: ".",
     logLevel: true,
     input: {
-      path: "./api.schema.yaml",
+      path: "http://localhost:3001/docs/json",
     },
     output: {
       path: "./src/shared/http",
@@ -57,7 +57,7 @@ export default defineConfig(async () => {
         group: { type: "tag", output: "./clients/axios/{{tag}}Service" },
 
         client: {
-          importPath: "@/shared/kubb-clients/axios-client",
+          importPath: "@/shared/utils/kubb-clients/axios-client",
         },
         dataReturnType: "full",
         pathParamsType: "object",
@@ -75,7 +75,7 @@ export default defineConfig(async () => {
         ],
         group: { type: "tag" },
         client: {
-          importPath: "@/shared/kubb-clients/axios-client",
+          importPath: "@/shared/utils/kubb-clients/axios-client",
         },
         infinite: {},
         dataReturnType: "full",

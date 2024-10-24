@@ -1,4 +1,4 @@
-import { backButton, viewport, themeParams, miniApp, initData, $debug, mainButton, init as initSDK } from "@telegram-apps/sdk-react"
+import { backButton, viewport, themeParams, miniApp, initData, $debug, mainButton, init as initSDK, useSignal } from "@telegram-apps/sdk-react"
 
 /**
  * Initializes the application and configures its dependencies.

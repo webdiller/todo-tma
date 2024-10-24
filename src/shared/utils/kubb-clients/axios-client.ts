@@ -28,6 +28,7 @@ export type ResponseConfig<TData = unknown> = {
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_AXIOS_BASE,
+  withCredentials: true,
   headers: typeof AXIOS_HEADERS !== "undefined" ? (JSON.parse(AXIOS_HEADERS) as AxiosHeaders) : undefined,
 })
 

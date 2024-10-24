@@ -1,11 +1,36 @@
+import { apiHooks, apiService } from "@/shared/http"
+import { LocalStorageService } from "@/shared/services/ServiceLocalStorage"
 import { Link, useLocation } from "@tanstack/react-router"
 import { initData, useSignal } from "@telegram-apps/sdk-react"
 import { Avatar, Tabbar, TabsList, Tappable, Switch, Multiselect, Modal, Spoiler, Button } from "@telegram-apps/telegram-ui"
-import { useState } from "react"
+import axios from "axios"
+import { useEffect, useState } from "react"
 export const PublicHeader = () => {
   const [isCheched, setIsCheched] = useState(false)
   const useLocationAPI = useLocation()
   const initDataUser = useSignal(initData.user)
+  const initDataHash = useSignal(initData.hash)
+
+  const handleLogin = apiHooks.authHooks.usePostApiAuthSignInByTelegram({
+    mutation: {}
+  })
+  useEffect(() => {
+    if (!!initDataUser && initDataHash?.length) {
+      try {
+        apiService.authService
+          .postApiAuthSignInByTelegram({
+            user: initDataUser,
+            hash: initDataHash,
+          })
+          .then((res) => {
+            LocalStorageService.setAccessToken(res.data.tokens.accessToken)
+          })
+      } catch (error) {
+        alert("error")
+      }
+    }
+  }, [initDataUser, initDataHash])
+
   return (
     <div className="mb-2">
       {/* APP BAR */}
