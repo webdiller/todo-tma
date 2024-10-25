@@ -4,6 +4,8 @@ import { pluginTs } from "@kubb/swagger-ts"
 import { pluginClient } from "@kubb/swagger-client"
 import { pluginTanstackQuery } from "@kubb/swagger-tanstack-query"
 import { pluginOas } from "@kubb/plugin-oas"
+import { pluginRedoc } from "@kubb/plugin-redoc"
+import { pluginMsw } from "@kubb/plugin-msw"
 
 export default defineConfig(async () => {
   return {
@@ -20,6 +22,11 @@ export default defineConfig(async () => {
       // done: ['prettier --write "**/*.{ts,tsx}"', "eslint --fix ./src/gen"],
     },
     plugins: [
+      pluginRedoc({
+        output: {
+          path: "./docs/index.html",
+        },
+      }),
       pluginOas({
         output: false,
         validate: true,

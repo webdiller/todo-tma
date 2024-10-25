@@ -52,11 +52,13 @@ module.exports = {
         header_bg_color: "hsl(var(--header_bg_color))",
         hint_color: "hsl(var(--hint_color))",
         link_color: "hsl(var(--link_color))",
+        link_color_alt: "hsl(var(--link_color_alt))",
         secondary_bg_color: "hsl(var(--secondary_bg_color))",
         section_bg_color: "hsl(var(--section_bg_color))",
         section_header_text_color: "hsl(var(--section_header_text_color))",
         subtitle_text_color: "hsl(var(--subtitle_text_color))",
         text_color: "hsl(var(--text_color))",
+        border: "hsl(var(--border))",
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

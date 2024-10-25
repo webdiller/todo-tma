@@ -1,10 +1,14 @@
 import { apiHooks, apiService, PostApiTodosMutationRequest } from "@/shared/http"
-import { Badge, Button, Card, Input } from "@telegram-apps/telegram-ui"
+import { Badge, Button, Input } from "@telegram-apps/telegram-ui"
 import { X } from "lucide-react"
 import { useEffect } from "react"
+import Document from "@tiptap/extension-document"
+import Paragraph from "@tiptap/extension-paragraph"
+import Text from "@tiptap/extension-text"
+import { EditorContent, useEditor } from "@tiptap/react"
 import { useForm } from "react-hook-form"
 import { addMinutes, addHours, addDays, addWeeks, addMonths, addYears, differenceInMilliseconds, differenceInMinutes } from "date-fns"
-import { sleep } from "@/shared/helpers/sleep"
+
 type DateOptions = "30_minutes" | "2_hours" | "1_day" | "3_days" | "1_week" | "2_weeks" | "1_month" | "2_months" | "6_months" | "1_year"
 type CreateTodo = PostApiTodosMutationRequest & {}
 
@@ -39,6 +43,23 @@ function generateDate(option: DateOptions): Date {
 export const ViewTodosCreate = () => {
   const useFormCreate = useForm<CreateTodo>()
   const usePostApiTodosAPI = apiHooks.todosHooks.usePostApiTodos({})
+
+  const editor = useEditor({
+    extensions: [Document, Paragraph, Text],
+    editorProps: {
+      attributes: {
+        class: "focus:outline-none border-2 border-border focus:border-link_color_alt rounded-xl px-3 py-4",
+      },
+    },
+    content: `
+      <p>
+        This is a radically reduced version of Tiptap. It has support for a document, with paragraphs and text. That’s it. It’s probably too much for real minimalists though.
+      </p>
+      <p>
+        The paragraph extension is not really required, but you need at least one node. Sure, that node can be something different.
+      </p>
+    `,
+  })
 
   useEffect(() => {
     useFormCreate.setFocus("questionTitle")
@@ -98,10 +119,11 @@ export const ViewTodosCreate = () => {
         <div className="space-y-1">
           <label className="text-stone-700">Answer</label>
           <div className="*:p-0">
-            <Input
+            {/* <Input
               {...useFormCreate.register("questionAnswer")}
               placeholder="Answer"
-            />
+            /> */}
+            <EditorContent editor={editor} />
           </div>
         </div>
 

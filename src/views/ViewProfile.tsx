@@ -10,8 +10,6 @@ export const ViewProfile = () => {
 
   const useGetApiUsersAPI = apiHooks.userHooks.useGetApiUsers()
 
-  console.log(useGetApiUsersAPI.data?.data)
-
   useEffect(() => {
     apiService.userService.patchApiUsers({
       timezone: userTimeZone,

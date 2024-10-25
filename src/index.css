@@ -13,11 +13,13 @@
     --header_bg_color: 207 26% 14%;
     --hint_color: 210 17% 52%;
     --link_color: 205 82% 65%;
+    --link_color_alt: 211 100 50%;
     --secondary_bg_color: 209 22% 20%;
     --section_bg_color: 207 26% 14%;
     --section_header_text_color: 205 82% 65%;
     --subtitle_text_color: 210 17% 52%;
     --text_color: 0 0% 96%;
+    --border: 0 0% 95%;
   }
   .dark {
     --accent_text_color: 205 82% 65%;
@@ -29,11 +31,13 @@
     --header_bg_color: 207 26% 14%;
     --hint_color: 210 17% 52%;
     --link_color: 205 82% 65%;
+    --link_color_alt: 211 100 50%;
     --secondary_bg_color: 209 22% 20%;
     --section_bg_color: 207 26% 14%;
     --section_header_text_color: 205 82% 65%;
     --subtitle_text_color: 210 17% 52%;
     --text_color: 0 0% 96%;
+    --border: 0 0% 95%;
   }
   html {
     @apply min-h-screen;

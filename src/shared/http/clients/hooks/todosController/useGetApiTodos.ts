@@ -125,9 +125,9 @@ export function useGetApiTodosSuspense<TData = GetApiTodos["response"], TQueryKe
     const { query: queryOptions, client: clientOptions = {} } = options ?? {};
     const queryKey = queryOptions?.queryKey ?? getApiTodosSuspenseQueryKey();
     const query = useSuspenseQuery({
-        ...getApiTodosSuspenseQueryOptions(clientOptions) as unknown as QueryObserverOptions,
+        ...getApiTodosSuspenseQueryOptions(clientOptions) as unknown as UseSuspenseQueryOptions,
         queryKey,
-        ...queryOptions as unknown as Omit<QueryObserverOptions, "queryKey">
+        ...queryOptions as unknown as Omit<UseSuspenseQueryOptions, "queryKey">
     }) as UseSuspenseQueryResult<TData, GetApiTodos["error"]> & {
         queryKey: TQueryKey;
     };
