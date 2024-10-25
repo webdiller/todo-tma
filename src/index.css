@@ -46,3 +46,27 @@
     @apply font-sans;
   }
 }
+
+.prose {
+  ul,
+  ol {
+    @apply pl-6 my-2;
+  }
+  li {
+    @apply pl-0;
+    p {
+      @apply my-0;
+    }
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply my-2;
+  }
+  p {
+    @apply my-2;
+  }
+}

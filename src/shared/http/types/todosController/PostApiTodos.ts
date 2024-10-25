@@ -15,6 +15,10 @@ export type PostApiTodos200 = {
     */
     questionAnswer: string;
     /**
+     * @type array
+    */
+    referencesToTheSource: string[];
+    /**
      * @type boolean
     */
     isActive: boolean;
@@ -48,6 +52,10 @@ export type PostApiTodosMutationRequest = {
      * @type array
     */
     repeat: string[];
+    /**
+     * @type array
+    */
+    referencesToTheSource: string[];
 };
 /**
  * @description Default Response
@@ -65,6 +73,10 @@ export type PostApiTodosMutationResponse = {
      * @type string
     */
     questionAnswer: string;
+    /**
+     * @type array
+    */
+    referencesToTheSource: string[];
     /**
      * @type boolean
     */

@@ -38,8 +38,8 @@ module.exports = {
           to: { height: "0" },
         },
         gradientShift: {
-          '0%': { backgroundPosition: '0% 50%' },
-          '100%': { backgroundPosition: '100% 50%' },
+          "0%": { backgroundPosition: "0% 50%" },
+          "100%": { backgroundPosition: "100% 50%" },
         },
       },
       colors: {
@@ -63,9 +63,9 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        gradientShift: 'gradientShift 3s linear infinite',
+        gradientShift: "gradientShift 3s linear infinite",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 }

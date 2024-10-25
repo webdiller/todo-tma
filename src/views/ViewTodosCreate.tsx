@@ -4,10 +4,13 @@ import { X } from "lucide-react"
 import { useEffect } from "react"
 import Document from "@tiptap/extension-document"
 import Paragraph from "@tiptap/extension-paragraph"
+import Typography from "@tiptap/extension-typography"
+import Highlight from "@tiptap/extension-highlight"
 import Text from "@tiptap/extension-text"
-import { EditorContent, useEditor } from "@tiptap/react"
+import { EditorContent, useEditor, FloatingMenu } from "@tiptap/react"
+import StarterKit from "@tiptap/starter-kit"
 import { useForm } from "react-hook-form"
-import { addMinutes, addHours, addDays, addWeeks, addMonths, addYears, differenceInMilliseconds, differenceInMinutes } from "date-fns"
+import { addMinutes, addHours, addDays, addWeeks, addMonths, addYears, differenceInMilliseconds, differenceInMinutes, format } from "date-fns"
 
 type DateOptions = "30_minutes" | "2_hours" | "1_day" | "3_days" | "1_week" | "2_weeks" | "1_month" | "2_months" | "6_months" | "1_year"
 type CreateTodo = PostApiTodosMutationRequest & {}
@@ -45,20 +48,13 @@ export const ViewTodosCreate = () => {
   const usePostApiTodosAPI = apiHooks.todosHooks.usePostApiTodos({})
 
   const editor = useEditor({
-    extensions: [Document, Paragraph, Text],
+    extensions: [StarterKit, Highlight, Typography],
     editorProps: {
       attributes: {
-        class: "focus:outline-none border-2 border-border focus:border-link_color_alt rounded-xl px-3 py-4",
+        class: "prose focus:outline-none border-2 border-border focus:border-link_color_alt rounded-xl px-3 py-4",
       },
     },
-    content: `
-      <p>
-        This is a radically reduced version of Tiptap. It has support for a document, with paragraphs and text. That’s it. It’s probably too much for real minimalists though.
-      </p>
-      <p>
-        The paragraph extension is not really required, but you need at least one node. Sure, that node can be something different.
-      </p>
-    `,
+    content: ``,
   })
 
   useEffect(() => {
@@ -67,36 +63,23 @@ export const ViewTodosCreate = () => {
 
   const onSubmit = async (data: CreateTodo) => {
     const now = new Date()
-    console.log("not formated: ", now)
-    console.log("formated: ", now.toDateString())
-    console.log("formated: ", now.toISOString())
-    console.log("formated: ", now.toJSON())
-    console.log("formated: ", now.toLocaleDateString())
-    console.log("formated: ", now.toLocaleTimeString())
-    console.log("formated: ", now.toTimeString())
-    console.log("formated: ", now.toUTCString())
-
-    return
-    // const now = new Date()
     const dates = [
-      generateDate("30_minutes"),
-      generateDate("2_hours"),
-      generateDate("1_day"),
-      generateDate("3_days"),
-      generateDate("1_week"),
-      generateDate("2_weeks"),
-      generateDate("1_month"),
-      generateDate("2_months"),
-      generateDate("6_months"),
-      generateDate("1_year"),
+      format(generateDate("30_minutes"), "yyyy-MM-dd'T'HH:mm:ss"),
+      format(generateDate("2_hours"), "yyyy-MM-dd'T'HH:mm:ss"),
+      format(generateDate("1_day"), "yyyy-MM-dd'T'HH:mm:ss"),
+      format(generateDate("3_days"), "yyyy-MM-dd'T'HH:mm:ss"),
+      format(generateDate("1_week"), "yyyy-MM-dd'T'HH:mm:ss"),
+      format(generateDate("2_weeks"), "yyyy-MM-dd'T'HH:mm:ss"),
+      format(generateDate("1_month"), "yyyy-MM-dd'T'HH:mm:ss"),
+      format(generateDate("2_months"), "yyyy-MM-dd'T'HH:mm:ss"),
+      format(generateDate("6_months"), "yyyy-MM-dd'T'HH:mm:ss"),
+      format(generateDate("1_year"), "yyyy-MM-dd'T'HH:mm:ss"),
     ]
-    console.log(dates)
-
-    return
     usePostApiTodosAPI.mutateAsync({
       questionTitle: data.questionTitle,
       questionAnswer: data.questionAnswer,
-      repeat: ["2024-10-25"],
+      repeat: dates,
+      referencesToTheSource: [],
     })
   }
 
@@ -104,26 +87,23 @@ export const ViewTodosCreate = () => {
     <div className="container space-y-4">
       <h1 className="text-2xl font-bold">Create Todo</h1>
       <form
+        autoComplete="off"
         onSubmit={useFormCreate.handleSubmit(onSubmit)}
         className="space-y-4">
         <div className="space-y-1">
           <label className="text-stone-700">Question</label>
           <div className="*:p-0">
-            <Input
-              {...useFormCreate.register("questionTitle")}
-              placeholder="Title"
-            />
+            <Input {...useFormCreate.register("questionTitle")} />
           </div>
         </div>
 
         <div className="space-y-1">
-          <label className="text-stone-700">Answer</label>
+          <label className="text-stone-700">Answer (Markdown support)</label>
           <div className="*:p-0">
-            {/* <Input
-              {...useFormCreate.register("questionAnswer")}
+            <EditorContent
               placeholder="Answer"
-            /> */}
-            <EditorContent editor={editor} />
+              editor={editor}
+            />
           </div>
         </div>
 

@@ -21,6 +21,10 @@ export type GetApiTodosId200 = {
     */
     questionAnswer: string;
     /**
+     * @type array
+    */
+    referencesToTheSource: string[];
+    /**
      * @type boolean
     */
     isActive: boolean;
@@ -57,6 +61,10 @@ export type GetApiTodosIdQueryResponse = {
      * @type string
     */
     questionAnswer: string;
+    /**
+     * @type array
+    */
+    referencesToTheSource: string[];
     /**
      * @type boolean
     */
