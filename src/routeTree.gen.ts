@@ -17,6 +17,8 @@ import { Route as ProfileIndexImport } from './routes/profile/index'
 import { Route as ProfileTodosIndexImport } from './routes/profile/todos/index'
 import { Route as ProfileTodosRecentIndexImport } from './routes/profile/todos/recent/index'
 import { Route as ProfileTodosCreateIndexImport } from './routes/profile/todos/create/index'
+import { Route as ProfileTodosTodoIdIndexImport } from './routes/profile/todos/$todoId/index'
+import { Route as ProfileTodosTodoIdEditIndexImport } from './routes/profile/todos/$todoId/edit/index'
 
 // Create/Update Routes
 
@@ -50,6 +52,17 @@ const ProfileTodosCreateIndexRoute = ProfileTodosCreateIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const ProfileTodosTodoIdIndexRoute = ProfileTodosTodoIdIndexImport.update({
+  path: '/profile/todos/$todoId/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProfileTodosTodoIdEditIndexRoute =
+  ProfileTodosTodoIdEditIndexImport.update({
+    path: '/profile/todos/$todoId/edit/',
+    getParentRoute: () => rootRoute,
+  } as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -82,6 +95,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileTodosIndexImport
       parentRoute: typeof rootRoute
     }
+    '/profile/todos/$todoId/': {
+      id: '/profile/todos/$todoId/'
+      path: '/profile/todos/$todoId'
+      fullPath: '/profile/todos/$todoId'
+      preLoaderRoute: typeof ProfileTodosTodoIdIndexImport
+      parentRoute: typeof rootRoute
+    }
     '/profile/todos/create/': {
       id: '/profile/todos/create/'
       path: '/profile/todos/create'
@@ -96,6 +116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProfileTodosRecentIndexImport
       parentRoute: typeof rootRoute
     }
+    '/profile/todos/$todoId/edit/': {
+      id: '/profile/todos/$todoId/edit/'
+      path: '/profile/todos/$todoId/edit'
+      fullPath: '/profile/todos/$todoId/edit'
+      preLoaderRoute: typeof ProfileTodosTodoIdEditIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -106,8 +133,10 @@ export interface FileRoutesByFullPath {
   '/ui-kit': typeof UiKitRoute
   '/profile': typeof ProfileIndexRoute
   '/profile/todos': typeof ProfileTodosIndexRoute
+  '/profile/todos/$todoId': typeof ProfileTodosTodoIdIndexRoute
   '/profile/todos/create': typeof ProfileTodosCreateIndexRoute
   '/profile/todos/recent': typeof ProfileTodosRecentIndexRoute
+  '/profile/todos/$todoId/edit': typeof ProfileTodosTodoIdEditIndexRoute
 }
 
 export interface FileRoutesByTo {
@@ -115,8 +144,10 @@ export interface FileRoutesByTo {
   '/ui-kit': typeof UiKitRoute
   '/profile': typeof ProfileIndexRoute
   '/profile/todos': typeof ProfileTodosIndexRoute
+  '/profile/todos/$todoId': typeof ProfileTodosTodoIdIndexRoute
   '/profile/todos/create': typeof ProfileTodosCreateIndexRoute
   '/profile/todos/recent': typeof ProfileTodosRecentIndexRoute
+  '/profile/todos/$todoId/edit': typeof ProfileTodosTodoIdEditIndexRoute
 }
 
 export interface FileRoutesById {
@@ -125,8 +156,10 @@ export interface FileRoutesById {
   '/ui-kit': typeof UiKitRoute
   '/profile/': typeof ProfileIndexRoute
   '/profile/todos/': typeof ProfileTodosIndexRoute
+  '/profile/todos/$todoId/': typeof ProfileTodosTodoIdIndexRoute
   '/profile/todos/create/': typeof ProfileTodosCreateIndexRoute
   '/profile/todos/recent/': typeof ProfileTodosRecentIndexRoute
+  '/profile/todos/$todoId/edit/': typeof ProfileTodosTodoIdEditIndexRoute
 }
 
 export interface FileRouteTypes {
@@ -136,24 +169,30 @@ export interface FileRouteTypes {
     | '/ui-kit'
     | '/profile'
     | '/profile/todos'
+    | '/profile/todos/$todoId'
     | '/profile/todos/create'
     | '/profile/todos/recent'
+    | '/profile/todos/$todoId/edit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/ui-kit'
     | '/profile'
     | '/profile/todos'
+    | '/profile/todos/$todoId'
     | '/profile/todos/create'
     | '/profile/todos/recent'
+    | '/profile/todos/$todoId/edit'
   id:
     | '__root__'
     | '/'
     | '/ui-kit'
     | '/profile/'
     | '/profile/todos/'
+    | '/profile/todos/$todoId/'
     | '/profile/todos/create/'
     | '/profile/todos/recent/'
+    | '/profile/todos/$todoId/edit/'
   fileRoutesById: FileRoutesById
 }
 
@@ -162,8 +201,10 @@ export interface RootRouteChildren {
   UiKitRoute: typeof UiKitRoute
   ProfileIndexRoute: typeof ProfileIndexRoute
   ProfileTodosIndexRoute: typeof ProfileTodosIndexRoute
+  ProfileTodosTodoIdIndexRoute: typeof ProfileTodosTodoIdIndexRoute
   ProfileTodosCreateIndexRoute: typeof ProfileTodosCreateIndexRoute
   ProfileTodosRecentIndexRoute: typeof ProfileTodosRecentIndexRoute
+  ProfileTodosTodoIdEditIndexRoute: typeof ProfileTodosTodoIdEditIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -171,8 +212,10 @@ const rootRouteChildren: RootRouteChildren = {
   UiKitRoute: UiKitRoute,
   ProfileIndexRoute: ProfileIndexRoute,
   ProfileTodosIndexRoute: ProfileTodosIndexRoute,
+  ProfileTodosTodoIdIndexRoute: ProfileTodosTodoIdIndexRoute,
   ProfileTodosCreateIndexRoute: ProfileTodosCreateIndexRoute,
   ProfileTodosRecentIndexRoute: ProfileTodosRecentIndexRoute,
+  ProfileTodosTodoIdEditIndexRoute: ProfileTodosTodoIdEditIndexRoute,
 }
 
 export const routeTree = rootRoute
@@ -191,8 +234,10 @@ export const routeTree = rootRoute
         "/ui-kit",
         "/profile/",
         "/profile/todos/",
+        "/profile/todos/$todoId/",
         "/profile/todos/create/",
-        "/profile/todos/recent/"
+        "/profile/todos/recent/",
+        "/profile/todos/$todoId/edit/"
       ]
     },
     "/": {
@@ -207,11 +252,17 @@ export const routeTree = rootRoute
     "/profile/todos/": {
       "filePath": "profile/todos/index.tsx"
     },
+    "/profile/todos/$todoId/": {
+      "filePath": "profile/todos/$todoId/index.tsx"
+    },
     "/profile/todos/create/": {
       "filePath": "profile/todos/create/index.tsx"
     },
     "/profile/todos/recent/": {
       "filePath": "profile/todos/recent/index.tsx"
+    },
+    "/profile/todos/$todoId/edit/": {
+      "filePath": "profile/todos/$todoId/edit/index.tsx"
     }
   }
 }

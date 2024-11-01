@@ -7,7 +7,7 @@ export const Route = createRootRoute({
     <AppRoot>
       <PublicHeader />
       <Outlet />
-      <TapBar />
+      {/* <TapBar /> */}
     </AppRoot>
   ),
 })

@@ -45,6 +45,13 @@
   body {
     @apply font-sans;
   }
+
+  #root {
+    @apply flex flex-col min-h-screen;
+    > div:first-child {
+      @apply flex-1 flex flex-col;
+    }
+  }
 }
 
 .prose {

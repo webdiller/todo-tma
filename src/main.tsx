@@ -10,6 +10,7 @@ import '@telegram-apps/telegram-ui/dist/styles.css';
 import "./index.css"
 import { init } from "./shared/libs/init"
 import { retrieveLaunchParams } from "@telegram-apps/sdk"
+import './mockEnv.ts';
 // Create a new router instance
 const router = createRouter({ routeTree })
 
@@ -25,12 +26,12 @@ const rootElement = document.getElementById("root")!
 if (!rootElement.innerHTML) {
   const isDevMode = process.env.NODE_ENV === "development" ? true : false
   const root = ReactDOM.createRoot(rootElement)
-  // init(retrieveLaunchParams().startParam === 'debug' || import.meta.env.DEV);
+  init(retrieveLaunchParams().startParam === 'debug' || import.meta.env.DEV);
   root.render(
     <StrictMode>
       <TanstackProvider>
         <RouterProvider router={router} />
-        {!isDevMode && <TanStackRouterDevtools />}
+        {/* {!isDevMode && <TanStackRouterDevtools />} */}
       </TanstackProvider>
     </StrictMode>,
   )

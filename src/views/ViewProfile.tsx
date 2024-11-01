@@ -9,6 +9,19 @@ export const ViewProfile = () => {
   const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
   const useGetApiUsersAPI = apiHooks.userHooks.useGetApiUsers()
+  const useGetApiTodosAPI = apiHooks.todosHooks.useGetApiTodos({
+    query: {
+      enabled: useGetApiUsersAPI.isSuccess,
+    },
+  })
+
+  // const useGetTimeZones = useQuery<unknown, unknown, TypeZoneProps[]>({
+  //   queryKey: ["timezones"],
+  //   queryFn: async () => {
+  //     const response = await fetch(`${import.meta.env.VITE_WEB_URL}/public/timezones.json`)
+  //     return await response.json()
+  //   },
+  // })
 
   useEffect(() => {
     apiService.userService.patchApiUsers({
@@ -18,9 +31,15 @@ export const ViewProfile = () => {
 
   return (
     <div className="container">
-      <div>{JSON.stringify(initDataState, undefined, 2)}</div>
-      <div>
+      <div className="space-y-2">
         <p>Time Zone: {userTimeZone}</p>
+        {/* <List className="*:p-0">
+          <Select>
+            {useGetTimeZones.data?.map((item) => {
+              return <option key={item.value}>{item.value}</option>
+            })}
+          </Select>
+        </List> */}
         <p>User Name: {initDataUser?.username}</p>
         <p>User ID: {initDataUser?.id}</p>
         <p>First Name: {initDataUser?.firstName}</p>

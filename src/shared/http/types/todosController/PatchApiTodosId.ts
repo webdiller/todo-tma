@@ -62,6 +62,10 @@ export type PatchApiTodosIdMutationRequest = {
      * @type boolean
     */
     isActive: boolean;
+    /**
+     * @type array
+    */
+    referencesToTheSource: string[];
 };
 /**
  * @description Default Response
