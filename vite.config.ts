@@ -9,7 +9,6 @@ export default defineConfig({
   server: {
     port: 3000,
   },
-
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -19,6 +18,7 @@ export default defineConfig({
       "@shared": path.resolve(__dirname, "./src/shared"),
     },
   },
+  base: "/todo-tma/",
   plugins: [
     react(),
     TanStackRouterVite(),
