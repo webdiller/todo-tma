@@ -3,40 +3,32 @@ name: Build React-Vite-TS App
 on:
   push:
     branches:
-      - main # Adjust the branch name if needed
-  pull_request:
-    branches:
-      - main # Adjust the branch name if needed
+      - main
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout the code
-      - name: Checkout code
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
+      - name: Setup Node
         uses: actions/setup-node@v3
-        with:
-          node-version: 18 # Use your preferred Node.js version
 
-      # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Build the app
-      - name: Build the app
+      - name: Build project
         run: npm run build
 
-      # Optional: Step 5: Upload build artifacts
-      - name: Upload build artifact
+      - name: Upload production-ready build files
         uses: actions/upload-artifact@v3
         with:
-          name: build
-          path: dist/ # Adjust the path if needed
+          name: production-files
+          path: ./dist
+
   deploy:
     name: Deploy
     needs: build
@@ -47,7 +39,7 @@ jobs:
       - name: Download artifact
         uses: actions/download-artifact@v3
         with:
-          name: build
+          name: production-files
           path: ./dist
 
       - name: Deploy to GitHub Pages
